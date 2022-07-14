@@ -1,0 +1,21 @@
+name: "datahubToFormal"
+source:
+  type: "kafka"
+  config:
+    connection:
+      bootstrap: ${KAFKA_BOOTSTRAP_SERVER:-localhost:9092}
+      schema_registry_url: ${SCHEMA_REGISTRY_URL:-http://localhost:8081}
+filter:
+  event_type: "EntityChangeEvent_v1"
+  event: 
+    category: "TAG"
+    entityType: "schemaField"
+
+action:
+  type: "formal-datahub.action:FormalAction"
+  config:
+    client_id: ${CLIENT_ID}
+    secret_key: ${SECRET_KEY}
+    # Map from the Datahub Dataset to the appropriate Formal Sidecar ID.
+    mappings:
+      urn:li:dataset:(urn:li:dataPlatform:postgres,myDb.mySchema.myTable,PROD): "formal-sidecar-ID-here"
