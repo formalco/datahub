@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "formal-datahub"
-version = "0.0.1"
+version = "0.0.02"
 authors = [
   { name="Formal", email="hello@joinformal.com" },
 ]
@@ -19,4 +19,4 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/formalco"
+"Homepage" = "https://github.com/formalco/formal-datahub"

@@ -16,15 +16,16 @@ Install the Formal package:
 
 
 
-See `example` for examples. Be sure to set your secrets in environment variables.
+See `/example` for examples. Be sure to set your secrets in environment variables.
 
 
 ---
 
+# Examples
 
-Ingestion: `datahub ingest -c ingest/formal_to_datahub.dhub.yaml`
+Run Ingestion: `datahub ingest -c ingest/formal_to_datahub.dhub.yaml`
 
-
-Action: `datahub actions -c actions/datahub_to_formal.yaml`
+Run Action: `datahub actions -c actions/datahub_to_formal.yaml`
 
 If you are having trouble installing on M1, see the following: https://segmentfault.com/a/1190000040867082/en
+
