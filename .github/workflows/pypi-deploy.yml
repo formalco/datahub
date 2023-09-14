@@ -12,13 +12,25 @@ jobs:
       name: pypi
       url: https://pypi.org/p/formal-datahub
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          echo "tag_version=$(echo "${{  github.ref_name }}" | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+      - name: Update version in pyproject.toml to ${{ steps.extract_version.outputs.tag_version }}
+        run: |
+          sed -i "s/^version = \".*\"$/version = \"${{ steps.extract_version.outputs.tag_version }}\"/" pyproject.toml
+      - name: Commit version changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Bump version to ${{ steps.extract_version.outputs.tag_version }}"
+          branch: master
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
